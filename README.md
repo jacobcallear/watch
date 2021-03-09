@@ -9,7 +9,7 @@ output.
 
 ## Usage
 
-- Run `echo Hello world!` command every 2 seconds (default):
+- Run `echo Hello world!` command repeatedly (every 2 seconds by default):
 
   ```shell
   watch echo Hello world!
@@ -18,5 +18,11 @@ output.
 - Run `echo Hello world!` command every 10 seconds:
 
   ```shell
-  watch -i 10 Hello world!
+  watch -i 10 echo Hello world!
+  ```
+
+- Run `git status` every 5 seconds, and clear the screen each time:
+
+  ```shell
+  watch -c -i 5 git status
   ```

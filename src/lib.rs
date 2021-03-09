@@ -6,14 +6,26 @@ pub struct Config {
     pub pause_seconds: u64,
     pub command: String,
     pub args: Vec<String>,
+    pub clear_screen: bool,
 }
 
 impl Config {
     pub fn new(mut args: env::Args) -> Result<Config, &'static str> {
         args.next();
+
         let first_arg = match args.next() {
             Some(arg) => arg,
             None => return Err("didn't get a shell command"),
+        };
+
+        let (first_arg, clear_screen) = if first_arg == *"-c" {
+            let first_arg = match args.next() {
+                Some(arg) => arg,
+                None => return Err("didn't get a shell command"),
+            };
+            (first_arg, true)
+        } else {
+            (first_arg, false)
         };
 
         let (pause_seconds, command) = if first_arg == *"-i" {
@@ -41,6 +53,7 @@ impl Config {
             pause_seconds,
             command,
             args,
+            clear_screen,
         })
     }
 }
