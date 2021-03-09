@@ -1,6 +1,8 @@
 use std::env;
 use std::process::Command;
 use std::process::Output;
+use std::time::Duration;
+use std::thread;
 
 fn main() {
     // Parse command line args
@@ -9,8 +11,12 @@ fn main() {
     let args: Vec<String> = args.collect();
 
     // Execute command and print stdout
-    let output = execute_shell_command(command.as_str(), &args);
-    println!("{}", String::from_utf8_lossy(&output.stdout));
+    loop {
+        let output = execute_shell_command(command.as_str(), &args);
+        println!("{}", String::from_utf8_lossy(&output.stderr));
+        println!("{}", String::from_utf8_lossy(&output.stdout));
+        thread::sleep(Duration::from_secs(2));
+    }
 }
 
 /// Executes a shell command and returns output
