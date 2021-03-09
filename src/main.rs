@@ -15,8 +15,8 @@ fn main() {
     // Execute command and print stdout and stderr
     loop {
         let output = execute_shell_command(config.command.as_str(), &config.args);
-        println!("{}", String::from_utf8_lossy(&output.stderr));
-        println!("{}", String::from_utf8_lossy(&output.stdout));
+        print!("{}", String::from_utf8_lossy(&output.stderr));
+        print!("{}", String::from_utf8_lossy(&output.stdout));
         thread::sleep(Duration::from_secs(config.pause_seconds));
     }
 }
