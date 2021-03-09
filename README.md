@@ -1,5 +1,7 @@
 # watch
 
+![Cargo tests and lints status](https://github.com/jacobcallear/watch/actions/workflows/tests.yml/badge.svg)
+
 Linux `watch` command for all OS's and shells
 
 Command line tool that runs a given command repeatedly and prints the command
