@@ -9,21 +9,19 @@ pub struct Config {
 }
 
 impl Config {
-    pub fn new(mut args: env::Args)-> Result<Config, &'static str> {
+    pub fn new(mut args: env::Args) -> Result<Config, &'static str> {
         args.next();
         let first_arg = match args.next() {
             Some(arg) => arg,
             None => return Err("didn't get a shell command"),
         };
 
-        let (pause_seconds, command) = if first_arg == String::from("-i") {
+        let (pause_seconds, command) = if first_arg == *"-i" {
             let error_message = "didn't get a whole number of seconds after `-i` flag";
             let pause_seconds: u64 = match args.next() {
-                Some(arg) => {
-                    match arg.parse() {
-                        Ok(int) => int,
-                        _ => return Err(error_message),
-                    }
+                Some(arg) => match arg.parse() {
+                    Ok(int) => int,
+                    _ => return Err(error_message),
                 },
                 None => return Err(error_message),
             };
@@ -48,7 +46,7 @@ impl Config {
 }
 
 /// Executes a shell command and returns output
-pub fn execute_shell_command(command: &str, args: &Vec<String>) -> Output {
+pub fn execute_shell_command(command: &str, args: &[String]) -> Output {
     let args = args.to_vec();
 
     Command::new(command)

@@ -1,7 +1,7 @@
 use std::env;
 use std::process;
-use std::time::Duration;
 use std::thread;
+use std::time::Duration;
 
 use watch::execute_shell_command;
 use watch::Config;
